@@ -1,3 +1,5 @@
+[C:\xampp\mysql\bin>mysql -u root -h localhost]
+
 SELECT - extracts data from a database
 UPDATE - updates data in a database
 DELETE - deletes data from a database
