@@ -1,0 +1,685 @@
+Microsoft Windows [Version 10.0.26200.7623]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\xampp\mysql\bin>d
+'d' is not recognized as an internal or external command,
+operable program or batch file.
+
+C:\xampp\mysql\bin>mysql -u root -h localhost
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 8
+Server version: 10.4.32-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> show databases;
++--------------------+
+| Database           |
++--------------------+
+| exams              |
+| information_schema |
+| mysql              |
+| performance_schema |
+| phpmyadmin         |
+| pscompany          |
+| saad               |
+| test               |
+| world              |
++--------------------+
+9 rows in set (0.409 sec)
+
+MariaDB [(none)]> use saad;
+Database changed
+MariaDB [saad]> show tables;
++-----------------+
+| Tables_in_saad  |
++-----------------+
+| marks           |
+| orders          |
+| studentdetailes |
+| user            |
++-----------------+
+4 rows in set (0.001 sec)
+
+MariaDB [saad]> desc user;
++------------+------------+------+-----+---------------------+-------------------------------+
+| Field      | Type       | Null | Key | Default             | Extra                         |
++------------+------------+------+-----+---------------------+-------------------------------+
+| Userr_id   | bigint(20) | NO   | PRI | NULL                |                               |
+| email      | text       | YES  |     | NULL                |                               |
+| created_at | timestamp  | NO   |     | current_timestamp() | on update current_timestamp() |
++------------+------------+------+-----+---------------------+-------------------------------+
+3 rows in set (0.058 sec)
+
+MariaDB [saad]> create table customers;
+ERROR 1113 (42000): A table must have at least 1 column
+MariaDB [saad]> create table customer(
+    ->
+    -> /c
+    -> \c
+MariaDB [saad]> create database sample;
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [saad]> use sample;
+Database changed
+MariaDB [sample]> create table customer;
+ERROR 1113 (42000): A table must have at least 1 column
+MariaDB [sample]> create table customer{
+    -> CustomerID int not null auto_increment,
+    -> CustomerName varchar(20) not null,
+    -> ContactName varchar(20) not null,
+    -> Address varchar(20) not null,
+    -> City varchar(30) not null,
+    -> postalCode int not null,
+    -> Country varchar(30) not null,
+    -> primary key(CustomerID));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '{
+CustomerID int not null auto_increment,
+CustomerName varchar(20) not null,
+...' at line 1
+MariaDB [sample]> create table customer(
+    -> CustomerID int not null auto_increment,
+    -> CustomerName varchar(20) not null,
+    -> ContactName varchar(20) not null,
+    -> Address varchar(20) not null,
+    -> City varchar(30) not null
+    -> \c
+MariaDB [sample]> create table customer(
+    -> CustomerID int not null auto_increment,
+    ->  CustomerName varchar(20) not null,
+    -> ContactName varchar(20) not null,
+    -> Address varchar(20) not null,
+    -> City varchar(30) not null,
+    -> postalCode int not null,
+    -> Country varchar(30) not null,
+    ->  primary key(CustomerID));
+Query OK, 0 rows affected (0.262 sec)
+
+MariaDB [sample]> desc customer;
++--------------+-------------+------+-----+---------+----------------+
+| Field        | Type        | Null | Key | Default | Extra          |
++--------------+-------------+------+-----+---------+----------------+
+| CustomerID   | int(11)     | NO   | PRI | NULL    | auto_increment |
+| CustomerName | varchar(20) | NO   |     | NULL    |                |
+| ContactName  | varchar(20) | NO   |     | NULL    |                |
+| Address      | varchar(20) | NO   |     | NULL    |                |
+| City         | varchar(30) | NO   |     | NULL    |                |
+| postalCode   | int(11)     | NO   |     | NULL    |                |
+| Country      | varchar(30) | NO   |     | NULL    |                |
++--------------+-------------+------+-----+---------+----------------+
+7 rows in set (0.080 sec)
+
+MariaDB [sample]> load data local infile "customer.txt" into table customer;
+ERROR 2 (HY000): File 'customer.txt' not found (Errcode: 2)
+MariaDB [sample]> load data local infile "C:/Users/dcsuser/Documents/Mysql practical/customer.txt" into table customer;
+Query OK, 6 rows affected, 19 warnings (0.050 sec)
+Records: 6  Deleted: 0  Skipped: 0  Warnings: 19
+
+MariaDB [sample]> select * from customer;
++------------+--------------------+----------------------+-------------+-------+------------+---------+
+| CustomerID | CustomerName       | ContactName          | Address     | City  | postalCode | Country |
++------------+--------------------+----------------------+-------------+-------+------------+---------+
+|          1 | Maria Anders       | Obere Str. 57        | Berlin      | 12209 |          0 |         |
+|          2 | Ana Trujillo       | Avda. de la Constitu | México D.F. | 05021 |          0 |         |
+|          3 | Antonio Moreno     | Mataderos 2312       | México D.F. | 05023 |          0 |         |
+|          4 | Ana David          | Obere Str. 48        | Berlin      | 25364 |          0 |         |
+|          5 | Thomas Hardy       | 120 Hanover Sq.      | London      | 236   |          0 |         |
+|          6 | Christina Berglund | Berguvsvägen 8       | Luleå       | 95822 |          0 |         |
++------------+--------------------+----------------------+-------------+-------+------------+---------+
+6 rows in set (0.269 sec)
+
+MariaDB [sample]> load data local infile "C:/Users/dcsuser/Documents/Mysql practical/customer.txt" into table customer;
+Query OK, 6 rows affected, 8 warnings (0.053 sec)
+Records: 6  Deleted: 0  Skipped: 0  Warnings: 8
+
+MariaDB [sample]> select * from customer;
++------------+----------------------+----------------------+----------------------+-------------+------------+----------+
+| CustomerID | CustomerName         | ContactName          | Address              | City        | postalCode | Country  |
++------------+----------------------+----------------------+----------------------+-------------+------------+----------+
+|          1 | Maria Anders         | Obere Str. 57        | Berlin               | 12209       |          0 |          |
+|          2 | Ana Trujillo         | Avda. de la Constitu | México D.F.          | 05021       |          0 |          |
+|          3 | Antonio Moreno       | Mataderos 2312       | México D.F.          | 05023       |          0 |          |
+|          4 | Ana David            | Obere Str. 48        | Berlin               | 25364       |          0 |          |
+|          5 | Thomas Hardy         | 120 Hanover Sq.      | London               | 236         |          0 |          |
+|          6 | Christina Berglund   | Berguvsvägen 8       | Luleå                | 95822       |          0 |          |
+ |         8 | Alfreds Futterkiste  | Maria Anders         | Obere Str. 57        | Berlin      |      12209 | Germany
+  |        9 | Ana Trujillo Empared | Ana Trujillo         | Avda. de la Constitu | México D.F. |       5021 | Mexico
+  |       10 | Antonio Moreno       | Antonio Moreno       | Mataderos 2312       | México D.F. |       5023 | Mexico
+ |        11 | helados Taquería     | Ana David            | Obere Str. 48        | Berlin      |      25364 | Germany
+      |   12 | Around the Horn      | Thomas Hardy         | 120 Hanover Sq.      | London      |        236 | UK
+|         13 | Berglunds snabbköp   | Christina Berglund   | Berguvsvägen 8       | Luleå       |      95822 | Sweden   |
++------------+----------------------+----------------------+----------------------+-------------+------------+----------+
+12 rows in set (0.000 sec)
+
+MariaDB [sample]> delete *from customer;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '*from customer' at line 1
+MariaDB [sample]> delete from customer;
+Query OK, 12 rows affected (0.046 sec)
+
+MariaDB [sample]> select*from customer;
+Empty set (0.000 sec)
+
+MariaDB [sample]> load data local infile "C:/Users/dcsuser/Documents/Mysql practical/customer.txt" into table customer;
+Query OK, 6 rows affected, 8 warnings (0.037 sec)
+Records: 6  Deleted: 0  Skipped: 0  Warnings: 8
+
+MariaDB [sample]> select * from customer;
++------------+----------------------+--------------------+----------------------+-------------+------------+----------+
+| CustomerID | CustomerName         | ContactName        | Address              | City        | postalCode | Country  |
++------------+----------------------+--------------------+----------------------+-------------+------------+----------+
+ |        15 | Alfreds Futterkiste  | Maria Anders       | Obere Str. 57        | Berlin      |      12209 | Germany
+  |       16 | Ana Trujillo Empared | Ana Trujillo       | Avda. de la Constitu | México D.F. |       5021 | Mexico
+  |       17 | Antonio Moreno       | Antonio Moreno     | Mataderos 2312       | México D.F. |       5023 | Mexico
+ |        18 | helados Taquería     | Ana David          | Obere Str. 48        | Berlin      |      25364 | Germany
+      |   19 | Around the Horn      | Thomas Hardy       | 120 Hanover Sq.      | London      |        236 | UK
+|         20 | Berglunds snabbköp   | Christina Berglund | Berguvsvägen 8       | Luleå       |      95822 | Sweden   |
++------------+----------------------+--------------------+----------------------+-------------+------------+----------+
+6 rows in set (0.000 sec)
+
+MariaDB [sample]> TRUNCATE TABLE customer;
+Query OK, 0 rows affected (0.239 sec)
+
+MariaDB [sample]> load data local infile "C:/Users/dcsuser/Documents/Mysql practical/customer.txt" into table customer;
+Query OK, 6 rows affected, 8 warnings (0.030 sec)
+Records: 6  Deleted: 0  Skipped: 0  Warnings: 8
+
+MariaDB [sample]> SELECT * FROM customer;
++------------+----------------------+--------------------+----------------------+-------------+------------+----------+
+| CustomerID | CustomerName         | ContactName        | Address              | City        | postalCode | Country  |
++------------+----------------------+--------------------+----------------------+-------------+------------+----------+
+|          1 | Alfreds Futterkiste  | Maria Anders       | Obere Str. 57 |      | Berlin      |      12209 | Germany
+|          2 | Ana Trujillo Empared | Ana Trujillo       | Avda. de la C  |titu | México D.F. |       5021 | Mexico
+|          3 | Antonio Moreno       | Antonio Moreno     | Mataderos 231  |     | México D.F. |       5023 | Mexico
+|          4 | helados Taquería     | Ana David          | Obere Str. 48 |      | Berlin      |      25364 | Germany
+|          5 | Around the Horn      | Thomas Hardy       | 120 Hanover S      | | London      |        236 | UK
+|          6 | Berglunds snabbköp   | Christina Berglund | Berguvsvägen 8       | Luleå       |      95822 | Sweden   |
++------------+----------------------+--------------------+----------------------+-------------+------------+----------+
+6 rows in set (0.000 sec)
+
+MariaDB [sample]> create table suppliers;
+ERROR 1113 (42000): A table must have at least 1 column
+MariaDB [sample]> create table suppliers(
+    -> SupplierID int not null auto_increment,
+    -> SupplierName varchar(20) not null,
+    -> ContactName varchar(20) not null,
+    -> Address varchar(20) not null,
+    -> Bye
+Ctrl-C -- exit!
+
+C:\xampp\mysql\bin>mysql -u root -h localhost
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 9
+Server version: 10.4.32-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> use sample;
+Database changed
+MariaDB [sample]> create table suppliers(
+    -> SupplierID int not null auto_increment,
+    -> SupplierName varchar(20) not null,
+    -> ContactName varchar(20) not null,
+    -> Address varchar(20) not null,
+    -> City varchar(20) not null,
+    -> PostalCode int not null,
+    -> Country varchar(20) not null,
+    -> primary key(SupplierID));
+Query OK, 0 rows affected (0.122 sec)
+
+MariaDB [sample]> desc suppliers;
++--------------+-------------+------+-----+---------+----------------+
+| Field        | Type        | Null | Key | Default | Extra          |
++--------------+-------------+------+-----+---------+----------------+
+| SupplierID   | int(11)     | NO   | PRI | NULL    | auto_increment |
+| SupplierName | varchar(20) | NO   |     | NULL    |                |
+| ContactName  | varchar(20) | NO   |     | NULL    |                |
+| Address      | varchar(20) | NO   |     | NULL    |                |
+| City         | varchar(20) | NO   |     | NULL    |                |
+| PostalCode   | int(11)     | NO   |     | NULL    |                |
+| Country      | varchar(20) | NO   |     | NULL    |                |
++--------------+-------------+------+-----+---------+----------------+
+7 rows in set (0.015 sec)
+
+MariaDB [sample]> load data local infile "C:/Users/dcsuser/Documents/Mysql practical/suppliers.txt" into table suppliers;
+Query OK, 4 rows affected, 11 warnings (0.049 sec)
+Records: 4  Deleted: 0  Skipped: 0  Warnings: 11
+
+MariaDB [sample]> select *from suppliers;
++------------+----------------+------------------+----------------+---------+------------+---------+
+| SupplierID | SupplierName   | ContactName      | Address        | City    | PostalCode | Country |
++------------+----------------+------------------+----------------+---------+------------+---------+
+|          1 | Exotic Liquid  | Charlotte Cooper | 49 Gilbert St. | Lond     |         0 | UK
+|          2 | Shelley Burke  | P.O. Box 78934   | New Orleans    | 70117   |          0 |         |
+|          3 | Regina Murphy  | 707 Oxford Rd.   | Ann Arbor      | 48104   |          0 |         |
+|          4 | Jene Homestead | 56 Gilbert St.   | London         | EC1 4SD |          0 |         |
++------------+----------------+------------------+----------------+---------+------------+---------+
+4 rows in set (0.000 sec)
+
+MariaDB [sample]> truncate table suppliers;
+Query OK, 0 rows affected (0.231 sec)
+
+MariaDB [sample]> load data local infile "C:/Users/dcsuser/Documents/Mysql practical/suppliers.txt" into table suppliers;
+Query OK, 4 rows affected, 6 warnings (0.048 sec)
+Records: 4  Deleted: 0  Skipped: 0  Warnings: 6
+
+MariaDB [sample]> select *from suppliers;
++------------+-----------------+------------------+----------------+-------------+------------+---------+
+| SupplierID | SupplierName    | ContactName      | Address        | City        | PostalCode | Country |
++------------+-----------------+------------------+----------------+-------------+------------+---------+
+     |     1 | Exotic Liquid   | Charlotte Cooper | 49 Gilbert St. | London      |          0 | UK
+    |      2 | New Orleans     | Shelley Burke    | P.O. Box 78934 | New Orleans |      70117 | USA
+    |      3 | Grandma Kelly's | Regina Murphy    | 707 Oxford Rd. | Ann Arbor   |      48104 | USA
+|          4 | Cajun Delights  | Jene Homestead   | 56 Gilbert St. | London      |          0 | UK      |
++------------+-----------------+------------------+----------------+-------------+------------+---------+
+4 rows in set (0.000 sec)
+
+MariaDB [sample]> truncate table suppliers;
+Query OK, 0 rows affected (0.244 sec)
+
+MariaDB [sample]> alter table suppliers change column PostalCode PostalCode varchar(20) not null;
+Query OK, 0 rows affected (0.302 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [sample]> load data local infile "C:/Users/dcsuser/Documents/Mysql practical/suppliers.txt" into table suppliers;
+Query OK, 4 rows affected, 4 warnings (0.041 sec)
+Records: 4  Deleted: 0  Skipped: 0  Warnings: 4
+
+MariaDB [sample]> select *from suppliers;
++------------+-----------------+------------------+----------------+-------------+------------+---------+
+| SupplierID | SupplierName    | ContactName      | Address        | City        | PostalCode | Country |
++------------+-----------------+------------------+----------------+-------------+------------+---------+
+|          1 | Exotic Liquid   | Charlotte Cooper | 49 Gilbert St. | Lon     |   | EC1 4SD    | UK
+|          2 | New Orleans     | Shelley Burke    | P.O. Box 78934 | New    |ans | 70117      | USA
+|          3 | Grandma Kelly's | Regina Murphy    | 707 Oxford Rd. | Ann    |r   | 48104      | USA
+|          4 | Cajun Delights  | Jene Homestead   | 56 Gilbert St. | London      | EC1 4SD    | UK      |
++------------+-----------------+------------------+----------------+-------------+------------+---------+
+4 rows in set (0.000 sec)
+
+MariaDB [sample]> truncate table suppliers;
+Query OK, 0 rows affected (0.183 sec)
+
+MariaDB [sample]> load data local infile "C:/Users/dcsuser/Documents/Mysql practical/suppliers.txt" into table suppliers;
+Query OK, 4 rows affected, 4 warnings (0.031 sec)
+Records: 4  Deleted: 0  Skipped: 0  Warnings: 4
+
+MariaDB [sample]> select *from suppliers;
++------------+-----------------+------------------+----------------+-------------+------------+---------+
+| SupplierID | SupplierName    | ContactName      | Address        | City        | PostalCode | Country |
++------------+-----------------+------------------+----------------+-------------+------------+---------+
+     |     1 | Exotic Liquid   | Charlotte Cooper | 49 Gilbert St. | London      | EC1 4SD    | UK
+    |      2 | New Orleans     | Shelley Burke    | P.O. Box 78934 | New Orleans | 70117      | USA
+    |      3 | Grandma Kelly's | Regina Murphy    | 707 Oxford Rd. | Ann Arbor   | 48104      | USA
+|          4 | Cajun Delights  | Jene Homestead   | 56 Gilbert St. | London      | EC1 4SD    | UK      |
++------------+-----------------+------------------+----------------+-------------+------------+---------+
+4 rows in set (0.000 sec)
+
+MariaDB [sample]> create table Staff(
+    -> SSN int not null,
+    -> FName varchar(20) not null,
+    -> LName varchar(20) not null,
+    -> Salary int not null,
+    -> DNum int not null,
+    -> \c
+MariaDB [sample]> create table Department(
+    -> DNum int not null primary key,
+    -> DName varchar(20) not null,
+    -> StartDate date not null);
+Query OK, 0 rows affected (0.141 sec)
+
+MariaDB [sample]>  create table Staff(
+    -> SSN int not null primary key,
+    -> FName varchar(20) not null,
+    -> LName varchar(20) not null,
+    -> Salary int not null,
+    -> foriegn key(DNum) refernces Department(DNum));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'key(DNum) refernces Department(DNum))' at line 6
+MariaDB [sample]> create table Staff(
+    -> SSN int not null primary key,
+    -> FName varchar(20) not null,
+    -> LName varchar(20) not null,
+    ->  Salary int not null,
+    -> foreign key(DNum) references Department(DNum));
+ERROR 1072 (42000): Key column 'DNum' doesn't exist in table
+MariaDB [sample]> desc Department;
++-----------+-------------+------+-----+---------+-------+
+| Field     | Type        | Null | Key | Default | Extra |
++-----------+-------------+------+-----+---------+-------+
+| DNum      | int(11)     | NO   | PRI | NULL    |       |
+| DName     | varchar(20) | NO   |     | NULL    |       |
+| StartDate | date        | NO   |     | NULL    |       |
++-----------+-------------+------+-----+---------+-------+
+3 rows in set (0.015 sec)
+
+MariaDB [sample]> create table Staff(
+    -> SSN int not null primary key,
+    -> FName varchar(20) not null,
+    -> LName varchar(20) not null,
+    -> Salary int not null,
+    -> DNum INT,
+    -> FOREIGN KEY (DNum) REFERENCES Department(DNum));
+Query OK, 0 rows affected (0.120 sec)
+
+MariaDB [sample]> desc Staff;
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| SSN    | int(11)     | NO   | PRI | NULL    |       |
+| FName  | varchar(20) | NO   |     | NULL    |       |
+| LName  | varchar(20) | NO   |     | NULL    |       |
+| Salary | int(11)     | NO   |     | NULL    |       |
+| DNum   | int(11)     | YES  | MUL | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+5 rows in set (0.031 sec)
+
+MariaDB [sample]>  load data local infile "C:/Users/dcsuser/Documents/Mysql practical/department.txt" into table Department;
+Query OK, 3 rows affected (0.055 sec)
+Records: 3  Deleted: 0  Skipped: 0  Warnings: 0
+
+MariaDB [sample]> select *from Department;
++------+----------------+------------+
+| DNum | DName          | StartDate  |
++------+----------------+------------+
+|    1 | ELTU           | 1981-06-09 |
+|    4 | Administration | 1995-01-01 |
+|    5 | Research       | 1998-05-22 |
++------+----------------+------------+
+3 rows in set (0.001 sec)
+
+MariaDB [sample]>  load data local infile "C:/Users/dcsuser/Documents/Mysql practical/staff.txt" into table Staff;
+Query OK, 6 rows affected, 5 warnings (0.045 sec)
+Records: 6  Deleted: 0  Skipped: 0  Warnings: 5
+
+MariaDB [sample]> select *from Staff;
++-------+----------+--------+--------+------+
+| SSN   | FName    | LName  | Salary | DNum |
++-------+----------+--------+--------+------+
+| 12345 | Jerrish  | Sharan |  30000 |    5 |
+| 33445 | Dinith   | Wreck  |  40000 |    5 |
+| 53453 | Jay      | Dilan  |  25000 |    5 |
+| 66884 | Ramya    | Naresh |  38000 |    5 |
+| 87654 | Jennifer | Mercy  |  43000 |    4 |
+| 99887 | Aila     | Shed   |  25000 |    4 |
++-------+----------+--------+--------+------+
+6 rows in set (0.000 sec)
+
+MariaDB [sample]> select *from Staff order by Salary asc;
++-------+----------+--------+--------+------+
+| SSN   | FName    | LName  | Salary | DNum |
++-------+----------+--------+--------+------+
+| 53453 | Jay      | Dilan  |  25000 |    5 |
+| 99887 | Aila     | Shed   |  25000 |    4 |
+| 12345 | Jerrish  | Sharan |  30000 |    5 |
+| 66884 | Ramya    | Naresh |  38000 |    5 |
+| 33445 | Dinith   | Wreck  |  40000 |    5 |
+| 87654 | Jennifer | Mercy  |  43000 |    4 |
++-------+----------+--------+--------+------+
+6 rows in set (0.001 sec)
+
+MariaDB [sample]> select *from Staff order by Salary desc;
++-------+----------+--------+--------+------+
+| SSN   | FName    | LName  | Salary | DNum |
++-------+----------+--------+--------+------+
+| 87654 | Jennifer | Mercy  |  43000 |    4 |
+| 33445 | Dinith   | Wreck  |  40000 |    5 |
+| 66884 | Ramya    | Naresh |  38000 |    5 |
+| 12345 | Jerrish  | Sharan |  30000 |    5 |
+| 53453 | Jay      | Dilan  |  25000 |    5 |
+| 99887 | Aila     | Shed   |  25000 |    4 |
++-------+----------+--------+--------+------+
+6 rows in set (0.000 sec)
+
+MariaDB [sample]> select *from Staff order by DNum and Salary;
++-------+----------+--------+--------+------+
+| SSN   | FName    | LName  | Salary | DNum |
++-------+----------+--------+--------+------+
+| 12345 | Jerrish  | Sharan |  30000 |    5 |
+| 33445 | Dinith   | Wreck  |  40000 |    5 |
+| 53453 | Jay      | Dilan  |  25000 |    5 |
+| 66884 | Ramya    | Naresh |  38000 |    5 |
+| 87654 | Jennifer | Mercy  |  43000 |    4 |
+| 99887 | Aila     | Shed   |  25000 |    4 |
++-------+----------+--------+--------+------+
+6 rows in set (0.001 sec)
+
+MariaDB [sample]> select distinct Dnum from Staff;
++------+
+| Dnum |
++------+
+|    4 |
+|    5 |
++------+
+2 rows in set (0.001 sec)
+
+MariaDB [sample]> select distinct Salary from Staff;
++--------+
+| Salary |
++--------+
+|  30000 |
+|  40000 |
+|  25000 |
+|  38000 |
+|  43000 |
++--------+
+5 rows in set (0.001 sec)
+
+MariaDB [sample]> select DNum, count(*) as number_of_staff from Staff group by DNum;
++------+-----------------+
+| DNum | number_of_staff |
++------+-----------------+
+|    4 |               2 |
+|    5 |               4 |
++------+-----------------+
+2 rows in set (0.001 sec)
+
+MariaDB [sample]> select DNum, sum(Salary) as toata_salary from Staff group by DNum;
++------+--------------+
+| DNum | toata_salary |
++------+--------------+
+|    4 |        68000 |
+|    5 |       133000 |
++------+--------------+
+2 rows in set (0.001 sec)
+
+MariaDB [sample]> select DNum, avg(Salary) as average_salary from Staff group by DNum;
++------+----------------+
+| DNum | average_salary |
++------+----------------+
+|    4 |     34000.0000 |
+|    5 |     33250.0000 |
++------+----------------+
+2 rows in set (0.001 sec)
+
+MariaDB [sample]> select concat(FName,'',LName) as full_name from Staff;
++---------------+
+| full_name     |
++---------------+
+| JerrishSharan |
+| DinithWreck   |
+| JayDilan      |
+| RamyaNaresh   |
+| JenniferMercy |
+| AilaShed      |
++---------------+
+6 rows in set (0.001 sec)
+
+MariaDB [sample]> select concat(FName,' ',LName, ' - ', Salary) as staff_details from Staff;
++------------------------+
+| staff_details          |
++------------------------+
+| Jerrish Sharan - 30000 |
+| Dinith Wreck - 40000   |
+| Jay Dilan - 25000      |
+| Ramya Naresh - 38000   |
+| Jennifer Mercy - 43000 |
+| Aila Shed - 25000      |
++------------------------+
+6 rows in set (0.001 sec)
+
+MariaDB [sample]> select *from Staff where DNum = 5;
++-------+---------+--------+--------+------+
+| SSN   | FName   | LName  | Salary | DNum |
++-------+---------+--------+--------+------+
+| 12345 | Jerrish | Sharan |  30000 |    5 |
+| 33445 | Dinith  | Wreck  |  40000 |    5 |
+| 53453 | Jay     | Dilan  |  25000 |    5 |
+| 66884 | Ramya   | Naresh |  38000 |    5 |
++-------+---------+--------+--------+------+
+4 rows in set (0.001 sec)
+
+MariaDB [sample]> select *from Staff where Salary > 35000;
++-------+----------+--------+--------+------+
+| SSN   | FName    | LName  | Salary | DNum |
++-------+----------+--------+--------+------+
+| 33445 | Dinith   | Wreck  |  40000 |    5 |
+| 66884 | Ramya    | Naresh |  38000 |    5 |
+| 87654 | Jennifer | Mercy  |  43000 |    4 |
++-------+----------+--------+--------+------+
+3 rows in set (0.001 sec)
+
+MariaDB [sample]> select *from Staff where Salary between 25000 and 40000;
++-------+---------+--------+--------+------+
+| SSN   | FName   | LName  | Salary | DNum |
++-------+---------+--------+--------+------+
+| 12345 | Jerrish | Sharan |  30000 |    5 |
+| 33445 | Dinith  | Wreck  |  40000 |    5 |
+| 53453 | Jay     | Dilan  |  25000 |    5 |
+| 66884 | Ramya   | Naresh |  38000 |    5 |
+| 99887 | Aila    | Shed   |  25000 |    4 |
++-------+---------+--------+--------+------+
+5 rows in set (0.001 sec)
+
+MariaDB [sample]> select *from Staff where FName like 'J%';
++-------+----------+--------+--------+------+
+| SSN   | FName    | LName  | Salary | DNum |
++-------+----------+--------+--------+------+
+| 12345 | Jerrish  | Sharan |  30000 |    5 |
+| 53453 | Jay      | Dilan  |  25000 |    5 |
+| 87654 | Jennifer | Mercy  |  43000 |    4 |
++-------+----------+--------+--------+------+
+3 rows in set (0.001 sec)
+
+MariaDB [sample]> select *from Staff where LName like 'h%';
+Empty set (0.000 sec)
+
+MariaDB [sample]> select *from Staff where Salary <> 25000;
++-------+----------+--------+--------+------+
+| SSN   | FName    | LName  | Salary | DNum |
++-------+----------+--------+--------+------+
+| 12345 | Jerrish  | Sharan |  30000 |    5 |
+| 33445 | Dinith   | Wreck  |  40000 |    5 |
+| 66884 | Ramya    | Naresh |  38000 |    5 |
+| 87654 | Jennifer | Mercy  |  43000 |    4 |
++-------+----------+--------+--------+------+
+4 rows in set (0.000 sec)
+
+MariaDB [sample]> select *from Staff where Salary != 25000;
++-------+----------+--------+--------+------+
+| SSN   | FName    | LName  | Salary | DNum |
++-------+----------+--------+--------+------+
+| 12345 | Jerrish  | Sharan |  30000 |    5 |
+| 33445 | Dinith   | Wreck  |  40000 |    5 |
+| 66884 | Ramya    | Naresh |  38000 |    5 |
+| 87654 | Jennifer | Mercy  |  43000 |    4 |
++-------+----------+--------+--------+------+
+4 rows in set (0.001 sec)
+
+MariaDB [sample]> select *from Staff where DNum = 4 or DNum = 5;
++-------+----------+--------+--------+------+
+| SSN   | FName    | LName  | Salary | DNum |
++-------+----------+--------+--------+------+
+| 12345 | Jerrish  | Sharan |  30000 |    5 |
+| 33445 | Dinith   | Wreck  |  40000 |    5 |
+| 53453 | Jay      | Dilan  |  25000 |    5 |
+| 66884 | Ramya    | Naresh |  38000 |    5 |
+| 87654 | Jennifer | Mercy  |  43000 |    4 |
+| 99887 | Aila     | Shed   |  25000 |    4 |
++-------+----------+--------+--------+------+
+6 rows in set (0.001 sec)
+
+MariaDB [sample]> select *from Staff order by FName asc;
++-------+----------+--------+--------+------+
+| SSN   | FName    | LName  | Salary | DNum |
++-------+----------+--------+--------+------+
+| 99887 | Aila     | Shed   |  25000 |    4 |
+| 33445 | Dinith   | Wreck  |  40000 |    5 |
+| 53453 | Jay      | Dilan  |  25000 |    5 |
+| 87654 | Jennifer | Mercy  |  43000 |    4 |
+| 12345 | Jerrish  | Sharan |  30000 |    5 |
+| 66884 | Ramya    | Naresh |  38000 |    5 |
++-------+----------+--------+--------+------+
+6 rows in set (0.001 sec)
+
+MariaDB [sample]> select max(Salary) as maximum_salary from Staff;
++----------------+
+| maximum_salary |
++----------------+
+|          43000 |
++----------------+
+1 row in set (0.001 sec)
+
+MariaDB [sample]> select min(Salary) as minimum_salary from Staff;
++----------------+
+| minimum_salary |
++----------------+
+|          25000 |
++----------------+
+1 row in set (0.000 sec)
+
+MariaDB [sample]> select count(*) as staff_count from Staff where Salary > (select avg(Salary) from Staff);
++-------------+
+| staff_count |
++-------------+
+|           3 |
++-------------+
+1 row in set (0.001 sec)
+
+MariaDB [sample]> select DNum from Staff having count(*) > 2 group by DNum;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'group by DNum' at line 1
+MariaDB [sample]> select DNum from Staff group by DNum having count(*) > 2;
++------+
+| DNum |
++------+
+|    5 |
++------+
+1 row in set (0.001 sec)
+
+MariaDB [sample]> select DNum from Staff group by DNum having sum(Salary) > 70000;
++------+
+| DNum |
++------+
+|    5 |
++------+
+1 row in set (0.001 sec)
+
+MariaDB [sample]> select distinct Salary from Staff order by Salary desc limit 1 offset 1;
++--------+
+| Salary |
++--------+
+|  40000 |
++--------+
+1 row in set (0.001 sec)
+
+MariaDB [sample]> select *from Staff where Salary in( select Salary from Staff group by Salary having count(*) > 1;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 1
+MariaDB [sample]> select max(Salary) as second_salary from Staff where Salary < (select max(Salary) from Staff);
++---------------+
+| second_salary |
++---------------+
+|         40000 |
++---------------+
+1 row in set (0.001 sec)
+
+MariaDB [sample]> select *from Staff where Salary in( select Salary from Staff group by Salary having count(*) > 1);
++-------+-------+-------+--------+------+
+| SSN   | FName | LName | Salary | DNum |
++-------+-------+-------+--------+------+
+| 53453 | Jay   | Dilan |  25000 |    5 |
+| 99887 | Aila  | Shed  |  25000 |    4 |
++-------+-------+-------+--------+------+
+2 rows in set (0.001 sec)
+
+MariaDB [sample]>
