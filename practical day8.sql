@@ -1,9 +1,3 @@
-
-Setting environment for using XAMPP for Windows.
-DCSUser@L4074 c:\xampp
-# mysql -u root -h local host
-ERROR 2005 (HY000): Unknown MySQL server host 'local' (11001)
-
 DCSUser@L4074 c:\xampp
 # mysql -u root -h localhost
 Welcome to the MariaDB monitor.  Commands end with ; or \g.
@@ -129,11 +123,7 @@ MariaDB [StudentManagementSystem]> desc Grade;
 | Grade      | varchar(20) | NO   |     | NULL    |       |
 +------------+-------------+------+-----+---------+-------+
 3 rows in set (0.010 sec)
-
-MariaDB [StudentManagementSystem]> alter table Grade change Grade Enrollment;
-ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 1
-MariaDB [StudentManagementSystem]> alter table Grade rename Grade Enrollment;
-ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'Enrollment' at line 1
+    
 MariaDB [StudentManagementSystem]> alter table Grade rename Enrollment;
 Query OK, 0 rows affected (0.198 sec)
 
@@ -174,29 +164,6 @@ MariaDB [StudentManagementSystem]> desc Course;
 | Teacher_name | varchar(20) | NO   | MUL | NULL    |       |
 +--------------+-------------+------+-----+---------+-------+
 3 rows in set (0.014 sec)
-
-MariaDB [StudentManagementSystem]> alter table Teacher change Techer_name Teacher_Id int not null auto_increment;
-ERROR 1054 (42S22): Unknown column 'Techer_name' in 'teacher'
-MariaDB [StudentManagementSystem]> alter table Teacher change Teacher_name Teacher_Id int not null auto_increment;
-ERROR 1846 (0A000): ALGORITHM=COPY is not supported. Reason: Columns participating in a foreign key are renamed. Try ALGORITHM=INPLACE
-MariaDB [StudentManagementSystem]> alter table Course change Teacher_name Teacher_Id int not null;
-ERROR 1846 (0A000): ALGORITHM=COPY is not supported. Reason: Columns participating in a foreign key are renamed. Try ALGORITHM=INPLACE
-MariaDB [StudentManagementSystem]> alter table Course change column Teacher_name Teacher_Id int not null;
-ERROR 1846 (0A000): ALGORITHM=COPY is not supported. Reason: Columns participating in a foreign key are renamed. Try ALGORITHM=INPLACE
-MariaDB [StudentManagementSystem]> alter table Teacher change column Techer_name Teacher_id int not null auto_increment;
-ERROR 1054 (42S22): Unknown column 'Techer_name' in 'teacher'
-MariaDB [StudentManagementSystem]> alter table Teacher change column Teacher_name Teacher_id int not null auto_increment;
-ERROR 1846 (0A000): ALGORITHM=COPY is not supported. Reason: Columns participating in a foreign key are renamed. Try ALGORITHM=INPLACE
-MariaDB [StudentManagementSystem]> alter table Teacher modify column Teacher_name Teacher_id int not null auto_increment;
-ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'int not null auto_increment' at line 1
-MariaDB [StudentManagementSystem]> alter table Teacher add constraint column Teacher_id int not null auto_increment primary key;
-ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'column Teacher_id int not null auto_increment primary key' at line 1
-MariaDB [StudentManagementSystem]> alter table Teacher add constraints column Teacher_id int not null auto_increment primary key;
-ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'column Teacher_id int not null auto_increment primary key' at line 1
-MariaDB [StudentManagementSystem]> alter table Teacher add constraints Teacher_id int not null auto_increment primary key;
-ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'int not null auto_increment primary key' at line 1
-MariaDB [StudentManagementSystem]> alter table Teacher change column Teacher_name Teacher_id int not null;
-ERROR 1846 (0A000): ALGORITHM=COPY is not supported. Reason: Columns participating in a foreign key are renamed. Try ALGORITHM=INPLACE
 MariaDB [StudentManagementSystem]> alter table Teacher change column Teacher_name Teacher_id int not null primary key;
 ERROR 1068 (42000): Multiple primary key defined
 MariaDB [StudentManagementSystem]> show create table course;
@@ -214,8 +181,6 @@ MariaDB [StudentManagementSystem]> show create table course;
 +--------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 1 row in set (0.001 sec)
 
-MariaDB [StudentManagementSystem]> alter table Course drop foreign key[course_ibfk_1];
-ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '[course_ibfk_1]' at line 1
 MariaDB [StudentManagementSystem]> alter table Course drop foreign key course_ibfk_1;
 Query OK, 0 rows affected (0.110 sec)
 Records: 0  Duplicates: 0  Warnings: 0
@@ -548,8 +513,4 @@ MariaDB [CustomerOrderSystem]> create table Order_Details(
     -> foreign key(order_Id) references Orders(order_Id),
     -> foreign key(Product_Id) references Products(Product_Id));
 ERROR 1068 (42000): Multiple primary key defined
-MariaDB [CustomerOrderSystem]> create table Order_Details(
-    -> order_Id int not null primary key,
-    -> Product_Id varchar(20) not null primary key,
-    -> \c,
-    ->
+MariaDB [CustomerOrderSystem]>
