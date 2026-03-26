@@ -1,0 +1,528 @@
+File directry: "C:\mongosh-2.4.2-win32-x64\bin\mongosh.exe"
+
+ease enter a MongoDB connection string (Default: mongodb://localhost/): Mongosh
+Mongosh
+Current Mongosh Log ID: 69c4ac101b92ae1702b71235
+Connecting to:          mongodb://127.0.0.1:27017/Mongosh?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.4.2
+Using MongoDB:          8.0.6
+Using Mongosh:          2.4.2
+
+For mongosh info see: https://www.mongodb.com/docs/mongodb-shell/
+
+------
+   The server generated these startup warnings when booting
+   2026-03-23T15:14:55.640+05:30: Access control is not enabled for the database. Read and write access to data and configuration is unrestricted
+------
+
+Mongosh> show dbs
+UOJ          72.00 KiB
+University  112.00 KiB
+admin        40.00 KiB
+config       48.00 KiB
+firstappdb   72.00 KiB
+local        80.00 KiB
+Mongosh> db
+Mongosh
+Mongosh> db.stats()
+{
+  db: 'Mongosh',
+  collections: Long('0'),
+  views: Long('0'),
+  objects: Long('0'),
+  avgObjSize: 0,
+  dataSize: 0,
+  storageSize: 0,
+  indexes: Long('0'),
+  indexSize: 0,
+  totalSize: 0,
+  scaleFactor: Long('1'),
+  fsUsedSize: 0,
+  fsTotalSize: 0,
+  ok: 1
+}
+Mongosh> use UOJ
+switched to db UOJ
+UOJ> use studentmanagementsystem
+switched to db studentmanagementsystem
+studentmanagementsystem> db.dropdatabase()
+TypeError: db.dropdatabase is not a function
+studentmanagementsystem> db.dropDatabase()
+{ ok: 1, dropped: 'studentmanagementsystem' }
+studentmanagementsystem> use StudentManagementSystem
+switched to db StudentManagementSystem
+StudentManagementSystem> db.createCollection("Students")
+{ ok: 1 }
+StudentManagementSystem> Show collections
+Uncaught:
+SyntaxError: Missing semicolon. (1:4)
+
+> 1 | Show collections
+    |     ^
+  2 |
+
+StudentManagementSystem> show collections
+Students
+StudentManagementSystem> db.Students.drop()
+true
+StudentManagementSystem> show collections
+
+StudentManagementSystem> db.createCollection("students")
+{ ok: 1 }
+StudentManagementSystem> show collection
+MongoshInvalidInputError: [COMMON-10001] 'collection' is not a valid argument for "show".
+StudentManagementSystem> show collections
+students
+StudentManagementSystem> db.students.insertOne({_id:"S001",name:"AAAA",aStudentManagementSystem> db.students.insertOne({_id:"S001",name:"AAAA",aStudentManagementSystem> db.students.insertOne({_id:"S001",name:"AAAA",aStudentManagementSystem> db.students.insertOne({_id:"S001",name:"AAAA",aStudentManagementSystem> db.students.insertOne({_id:"S001",name:"AAAA",aStudentManagementSystem> db.students.insertOne({_id:"S001",name:"AAAA",aStudentManagementSystem> db.students.insertOne({_id:"S001",name:"AAAA",aStudentManagementSystem> db.students.insertOne({_id:"S001",name:"AAAA",age:20,address:"JStudentManagementSystem> db.students.insertOne({_id:"S001",name:"AAAA",age:20,address:"Jaffna"})
+{ acknowledged: true, insertedId: 'S001' }
+Please enter a MongoDB connection string (Default: mongodb://localhost/)StudentManagementSystem> db.students.find()
+[ { _id: 'S001', name: 'AAAA', age: 20, address: 'Jaffna' } ]
+StudentManagementSystem> db.students.isertOne({_id:_id:"S002",name:"BBBB",age:20,address:"Colombo"})
+Uncaught:
+SyntaxError: Unexpected token, expected "," (1:29)
+
+> 1 | db.students.isertOne({_id:_id:"S002",name:"BBBB",age:20,address:"Colombo"})
+    |                              ^
+  2 |
+
+StudentManagementSystem> db.students.isertOne({_id:"S002",name:"BBBB",age:21,address:"Colombo"})
+TypeError: db.students.isertOne is not a function
+StudentManagementSystem> db.students.insertOne({_id:"S002",name:"BBBB",age:21,address:"Colombo"})
+{ acknowledged: true, insertedId: 'S002' }
+StudentManagementSystem> db.students.insertOne({_id:"S003",name:"CCCC",age:22,address:"Mannar"})
+{ acknowledged: true, insertedId: 'S003' }
+StudentManagementSystem> db.students.insertOne({_id:"S004",name:"DDDD",age:23,address:"Kandy"})
+{ acknowledged: true, insertedId: 'S004' }
+StudentManagementSystem> db.students.insertOne({_id:"S005",name:"EEEE",age:24,address:"Vavuniya"})
+{ acknowledged: true, insertedId: 'S005' }
+StudentManagementSystem> db.students.find()
+[
+  { _id: 'S001', name: 'AAAA', age: 20, address: 'Jaffna' },
+  { _id: 'S002', name: 'BBBB', age: 21, address: 'Colombo' },
+  { _id: 'S003', name: 'CCCC', age: 22, address: 'Mannar' },
+  { _id: 'S004', name: 'DDDD', age: 23, address: 'Kandy' },
+  { _id: 'S005', name: 'EEEE', age: 24, address: 'Vavuniya' }
+]
+StudentManagementSystem> db.students.insertMany([{ _id: "S006", name: "FFFF", age: 25, address: "puttalam" },{ _id: "S007", name: "GGGG", age: 21, address: "Colombo" }])
+{ acknowledged: true, insertedIds: { '0': 'S006', '1': 'S007' } }
+StudentManagementSystem> db.students.find()
+[
+  { _id: 'S001', name: 'AAAA', age: 20, address: 'Jaffna' },
+  { _id: 'S002', name: 'BBBB', age: 21, address: 'Colombo' },
+  { _id: 'S003', name: 'CCCC', age: 22, address: 'Mannar' },
+  { _id: 'S004', name: 'DDDD', age: 23, address: 'Kandy' },
+  { _id: 'S005', name: 'EEEE', age: 24, address: 'Vavuniya' },
+  { _id: 'S006', name: 'FFFF', age: 25, address: 'puttalam' },
+  { _id: 'S007', name: 'GGGG', age: 21, address: 'Colombo' }
+]
+StudentManagementSystem> db.students.find({age:21})
+[
+  { _id: 'S002', name: 'BBBB', age: 21, address: 'Colombo' },
+  { _id: 'S007', name: 'GGGG', age: 21, address: 'Colombo' }
+]
+StudentManagementSystem> db.students.find({name:"CCCC"})
+[ { _id: 'S003', name: 'CCCC', age: 22, address: 'Mannar' } ]
+StudentManagementSystem> db.students.find({$and:[{name:"AAAA",age:22}])
+Uncaught:
+SyntaxError: Unexpected token, expected "," (1:45)
+
+> 1 | db.students.find({$and:[{name:"AAAA",age:22}])
+    |                                              ^
+  2 |
+
+StudentManagementSystem> db.students.find({$and:[{name:"AAAA"},{age:22}]})
+
+StudentManagementSystem> db.students.find({$and:[{name:"AAAA"},{age:21}]})
+
+StudentManagementSystem> db.students.find({age:{$lt:22}})
+[
+  { _id: 'S001', name: 'AAAA', age: 20, address: 'Jaffna' },
+  { _id: 'S002', name: 'BBBB', age: 21, address: 'Colombo' },
+  { _id: 'S007', name: 'GGGG', age: 21, address: 'Colombo' }
+]
+StudentManagementSystem> db.students.find({age:{$gt:22}})
+[
+  { _id: 'S004', name: 'DDDD', age: 23, address: 'Kandy' },
+  { _id: 'S005', name: 'EEEE', age: 24, address: 'Vavuniya' },
+  { _id: 'S006', name: 'FFFF', age: 25, address: 'puttalam' }
+]
+StudentManagementSystem> db.students.find({age:{$gte:22}})
+[
+  { _id: 'S003', name: 'CCCC', age: 22, address: 'Mannar' },
+  { _id: 'S004', name: 'DDDD', age: 23, address: 'Kandy' },
+  { _id: 'S005', name: 'EEEE', age: 24, address: 'Vavuniya' },
+  { _id: 'S006', name: 'FFFF', age: 25, address: 'puttalam' }
+]
+StudentManagementSystem> db.students.find({age:{$ne:22}})
+[
+  { _id: 'S001', name: 'AAAA', age: 20, address: 'Jaffna' },
+  { _id: 'S002', name: 'BBBB', age: 21, address: 'Colombo' },
+  { _id: 'S004', name: 'DDDD', age: 23, address: 'Kandy' },
+  { _id: 'S005', name: 'EEEE', age: 24, address: 'Vavuniya' },
+  { _id: 'S006', name: 'FFFF', age: 25, address: 'puttalam' },
+  { _id: 'S007', name: 'GGGG', age: 21, address: 'Colombo' }
+]
+StudentManagementSystem> db.students.find({name:{$in:["AAAA","CCCC"]}})
+[
+  { _id: 'S001', name: 'AAAA', age: 20, address: 'Jaffna' },
+  { _id: 'S003', name: 'CCCC', age: 22, address: 'Mannar' }
+]
+StudentManagementSystem> db.students.find({name:{$nin:["AAAA","CCCC"]}})
+[
+  { _id: 'S002', name: 'BBBB', age: 21, address: 'Colombo' },
+  { _id: 'S004', name: 'DDDD', age: 23, address: 'Kandy' },
+  { _id: 'S005', name: 'EEEE', age: 24, address: 'Vavuniya' },
+  { _id: 'S006', name: 'FFFF', age: 25, address: 'puttalam' },
+  { _id: 'S007', name: 'GGGG', age: 21, address: 'Colombo' }
+]
+StudentManagementSystem> db.students.updateOne({name:"AAAA",{set:{name:"Jhon"}})
+Uncaught:
+SyntaxError: Unexpected token (1:35)
+
+> 1 | db.students.updateOne({name:"AAAA",{set:{name:"Jhon"}})
+    |                                    ^
+  2 |
+
+StudentManagementSystem> db.students.updateOne({name:"AAAA",{$set:{name:"Jhon"}})
+Uncaught:
+SyntaxError: Unexpected token (1:35)
+
+> 1 | db.students.updateOne({name:"AAAA",{$set:{name:"Jhon"}})
+    |                                    ^
+  2 |
+
+StudentManagementSystem> db.students.updateOne({name:"AAAA"},{$set:{name:"Jhon"}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+StudentManagementSystem> db.students.find()
+[
+  { _id: 'S001', name: 'Jhon', age: 20, address: 'Jaffna' },
+  { _id: 'S002', name: 'BBBB', age: 21, address: 'Colombo' },
+  { _id: 'S003', name: 'CCCC', age: 22, address: 'Mannar' },
+  { _id: 'S004', name: 'DDDD', age: 23, address: 'Kandy' },
+  { _id: 'S005', name: 'EEEE', age: 24, address: 'Vavuniya' },
+  { _id: 'S006', name: 'FFFF', age: 25, address: 'puttalam' },
+  { _id: 'S007', name: 'GGGG', age: 21, address: 'Colombo' }
+]
+StudentManagementSystem> db.students.updateOne({age:{$gt:24}},{$set:{name:"Denita"}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+StudentManagementSystem> db.students.find()
+[
+  { _id: 'S001', name: 'Jhon', age: 20, address: 'Jaffna' },
+  { _id: 'S002', name: 'BBBB', age: 21, address: 'Colombo' },
+  { _id: 'S003', name: 'CCCC', age: 22, address: 'Mannar' },
+  { _id: 'S004', name: 'DDDD', age: 23, address: 'Kandy' },
+  { _id: 'S005', name: 'EEEE', age: 24, address: 'Vavuniya' },
+  { _id: 'S006', name: 'Denita', age: 25, address: 'puttalam' },
+  { _id: 'S007', name: 'GGGG', age: 21, address: 'Colombo' }
+]
+StudentManagementSystem> db.students.updateOne({age:{$gt:25}},{$set:{name:"Denita"}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 0,
+  modifiedCount: 0,
+  upsertedCount: 0
+}
+StudentManagementSystem> db.students.find()
+[
+  { _id: 'S001', name: 'Jhon', age: 20, address: 'Jaffna' },
+  { _id: 'S002', name: 'BBBB', age: 21, address: 'Colombo' },
+  { _id: 'S003', name: 'CCCC', age: 22, address: 'Mannar' },
+  { _id: 'S004', name: 'DDDD', age: 23, address: 'Kandy' },
+  { _id: 'S005', name: 'EEEE', age: 24, address: 'Vavuniya' },
+  { _id: 'S006', name: 'Denita', age: 25, address: 'puttalam' },
+  { _id: 'S007', name: 'GGGG', age: 21, address: 'Colombo' }
+]
+StudentManagementSystem> db.students.updateOne({age:{$gt:20}},{$set:{name:"Denita"}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+StudentManagementSystem> db.students.find()
+[
+  { _id: 'S001', name: 'Jhon', age: 20, address: 'Jaffna' },
+  { _id: 'S002', name: 'Denita', age: 21, address: 'Colombo' },
+  { _id: 'S003', name: 'CCCC', age: 22, address: 'Mannar' },
+  { _id: 'S004', name: 'DDDD', age: 23, address: 'Kandy' },
+  { _id: 'S005', name: 'EEEE', age: 24, address: 'Vavuniya' },
+  { _id: 'S006', name: 'Denita', age: 25, address: 'puttalam' },
+  { _id: 'S007', name: 'GGGG', age: 21, address: 'Colombo' }
+]
+StudentManagementSystem> db.studentsDetails.upadateMany({},{$rename:{"name":"studentName"}})
+TypeError: db.studentsDetails.upadateMany is not a function
+StudentManagementSystem> db.studentsDetails.updateMany({},{$rename:{"name":"studentName"}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 0,
+  modifiedCount: 0,
+  upsertedCount: 0
+}
+StudentManagementSystem> db.students.find()
+[
+  { _id: 'S001', name: 'Jhon', age: 20, address: 'Jaffna' },
+  { _id: 'S002', name: 'Denita', age: 21, address: 'Colombo' },
+  { _id: 'S003', name: 'CCCC', age: 22, address: 'Mannar' },
+  { _id: 'S004', name: 'DDDD', age: 23, address: 'Kandy' },
+  { _id: 'S005', name: 'EEEE', age: 24, address: 'Vavuniya' },
+  { _id: 'S006', name: 'Denita', age: 25, address: 'puttalam' },
+  { _id: 'S007', name: 'GGGG', age: 21, address: 'Colombo' }
+]
+StudentManagementSystem> db.students.deleteOne({age:25})
+{ acknowledged: true, deletedCount: 1 }
+StudentManagementSystem> db.students.find()
+[
+  { _id: 'S001', name: 'Jhon', age: 20, address: 'Jaffna' },
+  { _id: 'S002', name: 'Denita', age: 21, address: 'Colombo' },
+  { _id: 'S003', name: 'CCCC', age: 22, address: 'Mannar' },
+  { _id: 'S004', name: 'DDDD', age: 23, address: 'Kandy' },
+  { _id: 'S005', name: 'EEEE', age: 24, address: 'Vavuniya' },
+  { _id: 'S007', name: 'GGGG', age: 21, address: 'Colombo' }
+]
+StudentManagementSystem> db.students.deleteOne({age:{$gt:22}})
+{ acknowledged: true, deletedCount: 1 }
+StudentManagementSystem> db.students.find()
+[
+  { _id: 'S001', name: 'Jhon', age: 20, address: 'Jaffna' },
+  { _id: 'S002', name: 'Denita', age: 21, address: 'Colombo' },
+  { _id: 'S003', name: 'CCCC', age: 22, address: 'Mannar' },
+  { _id: 'S005', name: 'EEEE', age: 24, address: 'Vavuniya' },
+  { _id: 'S007', name: 'GGGG', age: 21, address: 'Colombo' }
+]
+StudentManagementSystem> db.students.find({},{age:1,address:1,_id:0})
+[
+  { age: 20, address: 'Jaffna' },
+  { age: 21, address: 'Colombo' },
+  { age: 22, address: 'Mannar' },
+  { age: 24, address: 'Vavuniya' },
+  { age: 21, address: 'Colombo' }
+]
+StudentManagementSystem> db.students.find({},{_id:0,studensName:0})
+[
+  { name: 'Jhon', age: 20, address: 'Jaffna' },
+  { name: 'Denita', age: 21, address: 'Colombo' },
+  { name: 'CCCC', age: 22, address: 'Mannar' },
+  { name: 'EEEE', age: 24, address: 'Vavuniya' },
+  { name: 'GGGG', age: 21, address: 'Colombo' }
+]
+StudentManagementSystem> db.students.find({},{_id:0,studentName:0})
+[
+  { name: 'Jhon', age: 20, address: 'Jaffna' },
+  { name: 'Denita', age: 21, address: 'Colombo' },
+  { name: 'CCCC', age: 22, address: 'Mannar' },
+  { name: 'EEEE', age: 24, address: 'Vavuniya' },
+  { name: 'GGGG', age: 21, address: 'Colombo' }
+]
+StudentManagementSystem> db.students.find({},{_id:0}).limit(3)
+[
+  { name: 'Jhon', age: 20, address: 'Jaffna' },
+  { name: 'Denita', age: 21, address: 'Colombo' },
+  { name: 'CCCC', age: 22, address: 'Mannar' }
+]
+StudentManagementSystem> db.students.renameCollection("studentDetails")
+{ ok: 1 }
+StudentManagementSystem> show collections
+studentDetails
+StudentManagementSystem> db.studentDetails.find().sort({_id:-1})
+[
+  { _id: 'S007', name: 'GGGG', age: 21, address: 'Colombo' },
+  { _id: 'S005', name: 'EEEE', age: 24, address: 'Vavuniya' },
+  { _id: 'S003', name: 'CCCC', age: 22, address: 'Mannar' },
+  { _id: 'S002', name: 'Denita', age: 21, address: 'Colombo' },
+  { _id: 'S001', name: 'Jhon', age: 20, address: 'Jaffna' }
+]
+StudentManagementSystem> db.studentDetails.find().sort({_id:1})
+[
+  { _id: 'S001', name: 'Jhon', age: 20, address: 'Jaffna' },
+  { _id: 'S002', name: 'Denita', age: 21, address: 'Colombo' },
+  { _id: 'S003', name: 'CCCC', age: 22, address: 'Mannar' },
+  { _id: 'S005', name: 'EEEE', age: 24, address: 'Vavuniya' },
+  { _id: 'S007', name: 'GGGG', age: 21, address: 'Colombo' }
+]
+StudentManagementSystem> db.studentDetails.aggregate([{$group:{_id:"age",count:{$sum:1}}}])
+[ { _id: 'age', count: 5 } ]
+StudentManagementSystem> db.studentDetails.aggregate([{$group:{_id:"age",counting:{$sum:1}}}])
+[ { _id: 'age', counting: 5 } ]
+StudentManagementSystem> db.studentDetails.aggregate([{$group:{_id:"$age",counting:{$sum:1}}}])
+[
+  { _id: 20, counting: 1 },
+  { _id: 22, counting: 1 },
+  { _id: 21, counting: 2 },
+  { _id: 24, counting: 1 }
+]
+StudentManagementSystem> use StudentManagement
+switched to db StudentManagement
+StudentManagement> db.createCollection("Students")
+{ ok: 1 }
+StudentManagement> db.Students.insertMany([{name:"Alice",age:"20",marks:"85"},{name:"Bob",age:"21",marks:"92"},{name:"Charlie",age:"20",marks:"78"},{name:"David",age:"22",marks:"88"},{name:"Eva",age:"21",marks:"95"}])
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId('69c4cd1e1b92ae1702b71236'),
+    '1': ObjectId('69c4cd1e1b92ae1702b71237'),
+    '2': ObjectId('69c4cd1e1b92ae1702b71238'),
+    '3': ObjectId('69c4cd1e1b92ae1702b71239'),
+    '4': ObjectId('69c4cd1e1b92ae1702b7123a')
+  }
+}
+StudentManagement> show collections
+Students
+StudentManagement> db.Students.insertMany([{name:"Alice",age:"20",marks:"85"},{name:"Bob",age:"21",marks:"92"},{name:"Charlie",age:"20",marks:"78"},{name:"David",age:"22",marks:"88"},{_id:"S005",name:"Eva",age:"21",marks:"95"}])
+StudentManagement> db.Students.insertMany([{_id:"S001",name:"Alice",age:"20",marks:"85"},{_id:"S002",name:"Bob",age:"21",marks:"92"},{_id:"S003",name:"Charlie",age:"20",marks:"78"},{_id:"S004",name:"David",age:"22",marks:"88"},{_id:"S005",name:"Eva",age:"21",marks:"95"}])
+{
+  acknowledged: true,
+  insertedIds: { '0': 'S001', '1': 'S002', '2': 'S003', '3': 'S004', '4': 'S005' }
+}
+StudentManagement> db.Students.find()
+[
+  {
+    _id: ObjectId('69c4cd1e1b92ae1702b71236'),
+    name: 'Alice',
+    age: '20',
+    marks: '85'
+  },
+  {
+    _id: ObjectId('69c4cd1e1b92ae1702b71237'),
+    name: 'Bob',
+    age: '21',
+    marks: '92'
+  },
+  {
+    _id: ObjectId('69c4cd1e1b92ae1702b71238'),
+    name: 'Charlie',
+    age: '20',
+    marks: '78'
+  },
+  {
+    _id: ObjectId('69c4cd1e1b92ae1702b71239'),
+    name: 'David',
+    age: '22',
+    marks: '88'
+  },
+  {
+    _id: ObjectId('69c4cd1e1b92ae1702b7123a'),
+    name: 'Eva',
+    age: '21',
+    marks: '95'
+  },
+  { _id: 'S001', name: 'Alice', age: '20', marks: '85' },
+  { _id: 'S002', name: 'Bob', age: '21', marks: '92' },
+  { _id: 'S003', name: 'Charlie', age: '20', marks: '78' },
+  { _id: 'S004', name: 'David', age: '22', marks: '88' },
+  { _id: 'S005', name: 'Eva', age: '21', marks: '95' }
+]
+StudentManagement> db.Students.deleteMany({ _id: { $type: "objectId" } })
+{ acknowledged: true, deletedCount: 5 }
+StudentManagement> db.Students.find()
+[
+  { _id: 'S001', name: 'Alice', age: '20', marks: '85' },
+  { _id: 'S002', name: 'Bob', age: '21', marks: '92' },
+  { _id: 'S003', name: 'Charlie', age: '20', marks: '78' },
+  { _id: 'S004', name: 'David', age: '22', marks: '88' },
+  { _id: 'S005', name: 'Eva', age: '21', marks: '95' }
+]
+StudentManagement> db.Students.aggregate([
+... {
+... \c
+Uncaught:
+SyntaxError: Expecting Unicode escape sequence \uXXXX. (3:1)
+
+  1 | db.Students.aggregate([
+  2 | {
+> 3 | \c
+    |  ^
+  4 |
+
+StudentManagement> db.Students.aggregate([{$group: { _id:"$age",avgMarks: {$avg: "$marks"}}}])
+[
+  { _id: '21', avgMarks: null },
+  { _id: '20', avgMarks: null },
+  { _id: '22', avgMarks: null }
+]
+StudentManagement> db.Students.updateMany({},[{$set: {marks: { $toInt: "$marks" }}}])
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 5,
+  modifiedCount: 5,
+  upsertedCount: 0
+}
+StudentManagement> db.Students.find()
+[
+  { _id: 'S001', name: 'Alice', age: '20', marks: 85 },
+  { _id: 'S002', name: 'Bob', age: '21', marks: 92 },
+  { _id: 'S003', name: 'Charlie', age: '20', marks: 78 },
+  { _id: 'S004', name: 'David', age: '22', marks: 88 },
+  { _id: 'S005', name: 'Eva', age: '21', marks: 95 }
+]
+StudentManagement>  db.Students.aggregate([{$group: { _id:"$age",avgMarks: {$avg: "$marks"}}}])
+[
+  { _id: '20', avgMarks: 81.5 },
+  { _id: '22', avgMarks: 88 },
+  { _id: '21', avgMarks: 93.5 }
+]
+StudentManagement>  db.Students.aggregate([{$group: { _id:"$marks",count: {$sum: 1}}}])
+[
+  { _id: 85, count: 1 },
+  { _id: 78, count: 1 },
+  { _id: 92, count: 1 },
+  { _id: 95, count: 1 },
+  { _id: 88, count: 1 }
+]
+StudentManagement> Db.Students.updateOne(
+...   { _id: "S001" },
+...   { $set: { department: "CS" } }
+... )
+...
+... Db.Students.updateOne({ _id: "S002" }, { $set: { department: "IT" } })
+... Db.Students.updateOne({ _id: "S003" }, { $set: { department: "CS" } })
+... Db.Students.updateOne({ _id: "S004" }, { $set: { department: "IT" } })
+... Db.Students.updateOne({ _id: "S005" }, { $set: { department: "CS" } })
+ReferenceError: Db is not defined
+StudentManagement> db.Students.updateOne({ _id: "S002" }, { $set: { department: "IT" } })
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+StudentManagement> db.Students.updateOne({ _id: "S005" }, { $set: { department: "CS" } })
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+StudentManagement> db.Students.find()
+[
+  { _id: 'S001', name: 'Alice', age: '20', marks: 85 },
+  { _id: 'S002', name: 'Bob', age: '21', marks: 92, department: 'IT' },
+  { _id: 'S003', name: 'Charlie', age: '20', marks: 78 },
+  { _id: 'S004', name: 'David', age: '22', marks: 88 },
+  { _id: 'S005', name: 'Eva', age: '21', marks: 95, department: 'CS' }
+]
+StudentManagement> Db.Students.aggregate([
+...   {
+...     $group: {
+...       _id: "$department",        // group by department
+...       maxMarks: { $max: "$marks" }  // find maximum marks
+...     }
+...   }
+...     }
+StudentManagement>
