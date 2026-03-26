@@ -1,10 +1,6 @@
 
 Setting environment for using XAMPP for Windows.
 DCSUser@L4097 c:\xampp
-# mysql -u root -h local host
-ERROR 2005 (HY000): Unknown MySQL server host 'local' (11001)
-
-DCSUser@L4097 c:\xampp
 # mysql -u root -h localhost
 Welcome to the MariaDB monitor.  Commands end with ; or \g.
 Your MariaDB connection id is 8
