@@ -1,0 +1,358 @@
+Please enter a MongoDB connection string (Default: mongodb://localhost/):
+
+Current Mongosh Log ID: 69d60718a22e248f633682d0
+Connecting to:          mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.8.2
+Using MongoDB:          8.2.6
+Using Mongosh:          2.8.2
+
+For mongosh info see: https://www.mongodb.com/docs/mongodb-shell/
+
+------
+   The server generated these startup warnings when booting
+   2026-04-08T12:03:01.803+05:30: Access control is not enabled for the database. Read and write access to data and configuration is unrestricted
+------
+
+test> show dbs
+PMSD        76.00 KiB
+University  56.00 KiB
+admin       40.00 KiB
+company     72.00 KiB
+config      96.00 KiB
+local       76.00 KiB
+mydb        40.00 KiB
+test> use company
+switched to db company
+company> show collections
+product
+company> db.product.find()
+[
+  {
+    _id: 'o1',
+    year: 2020,
+    cost: 3000,
+    items: [ { product: 'p1', size: [ 'M', 'L' ], quantity: 15 } ],
+    address: { city: 'Jaffna', country: 'Sri Lanka' },
+    status: 'paid',
+    delivery_days: 5
+  },
+  {
+    _id: 'o2',
+    year: 2020,
+    cost: 4500,
+    items: [
+      { product: 'p2', size: [ 'L' ], quantity: 20 },
+      { product: 'p3', size: [ 'M', 'S' ], quantity: 2 }
+    ],
+    address: { city: 'Colombo', country: 'Sri Lanka' },
+    status: 'paid',
+    delivery_days: 4
+  }
+]
+
+company> db.product.insertMany({"_id":"o3","year":2018,"cost":1500,"items":[{"product":"p3","size":["L","XL"],"quantity":4}],"address": {"city": "Chennai", "country": "India"},"status": "pending", "delivery_days":4},{"_id":"o4","year":2017,"cost":1700,"items":[{"product":"p2","size":["M","S"],"quantity":14},{"product":"p4","size":["M"],"quantity":1}], "address": {"city": "Kandy", "country": "Sri Lanka"},"status": "paid","delivery_days":2},{"_id":"o5","year":2020,"cost":1900, "items":[{"product":"p1","size":["S","XL"], "quantity":15}],"address": {"city": "Colombo", "country": "Sri Lanka"},"status": "pending", "delivery_days":3})
+MongoInvalidArgumentError: Argument "docs" must be an array of documents
+company> db.product.insertMany([{"_id":"o3","year":2018,"cost":1500,"items":[{"product":"p3","size":["L","XL"],"quantity":4}],"address": {"city": "Chennai", "country": "India"},"status": "pending", "delivery_days":4},{"_id":"o4","year":2017,"cost":1700,"items":[{"product":"p2","size":["M","S"],"quantity":14},{"product":"p4","size":["M"],"quantity":1}], "address": {"city": "Kandy", "country": "Sri Lanka"},"status": "paid","delivery_days":2},{"_id":"o5","year":2020,"cost":1900, "items":[{"product":"p1","size":["S","XL"], "quantity":15}],"address": {"city": "Colombo", "country": "Sri Lanka"},"status": "pending", "delivery_days":3}])
+{
+  acknowledged: true,
+  insertedIds: { '0': 'o3', '1': 'o4', '2': 'o5' }
+}
+company> db.product.find()
+[
+  {
+    _id: 'o1',
+    year: 2020,
+    cost: 3000,
+    items: [ { product: 'p1', size: [ 'M', 'L' ], quantity: 15 } ],
+    address: { city: 'Jaffna', country: 'Sri Lanka' },
+    status: 'paid',
+    delivery_days: 5
+  },
+  {
+    _id: 'o2',
+    year: 2020,
+    cost: 4500,
+    items: [
+      { product: 'p2', size: [ 'L' ], quantity: 20 },
+      { product: 'p3', size: [ 'M', 'S' ], quantity: 2 }
+    ],
+    address: { city: 'Colombo', country: 'Sri Lanka' },
+    status: 'paid',
+    delivery_days: 4
+  },
+  {
+    _id: 'o3',
+    year: 2018,
+    cost: 1500,
+    items: [ { product: 'p3', size: [ 'L', 'XL' ], quantity: 4 } ],
+    address: { city: 'Chennai', country: 'India' },
+    status: 'pending',
+    delivery_days: 4
+  },
+  {
+    _id: 'o4',
+    year: 2017,
+    cost: 1700,
+    items: [
+      { product: 'p2', size: [ 'M', 'S' ], quantity: 14 },
+      { product: 'p4', size: [ 'M' ], quantity: 1 }
+    ],
+    address: { city: 'Kandy', country: 'Sri Lanka' },
+    status: 'paid',
+    delivery_days: 2
+  },
+  {
+    _id: 'o5',
+    year: 2020,
+    cost: 1900,
+    items: [ { product: 'p1', size: [ 'S', 'XL' ], quantity: 15 } ],
+    address: { city: 'Colombo', country: 'Sri Lanka' },
+    status: 'pending',
+    delivery_days: 3
+  }
+]
+
+company> db.product.find().pretty()
+[
+  {
+    _id: 'o1',
+    year: 2020,
+    cost: 3000,
+    items: [ { product: 'p1', size: [ 'M', 'L' ], quantity: 15 } ],
+    address: { city: 'Jaffna', country: 'Sri Lanka' },
+    status: 'paid',
+    delivery_days: 5
+  },
+  {
+    _id: 'o2',
+    year: 2020,
+    cost: 4500,
+    items: [
+      { product: 'p2', size: [ 'L' ], quantity: 20 },
+      { product: 'p3', size: [ 'M', 'S' ], quantity: 2 }
+    ],
+    address: { city: 'Colombo', country: 'Sri Lanka' },
+    status: 'paid',
+    delivery_days: 4
+  },
+  {
+    _id: 'o3',
+    year: 2018,
+    cost: 1500,
+    items: [ { product: 'p3', size: [ 'L', 'XL' ], quantity: 4 } ],
+    address: { city: 'Chennai', country: 'India' },
+    status: 'pending',
+    delivery_days: 4
+  },
+  {
+    _id: 'o4',
+    year: 2017,
+    cost: 1700,
+    items: [
+      { product: 'p2', size: [ 'M', 'S' ], quantity: 14 },
+      { product: 'p4', size: [ 'M' ], quantity: 1 }
+    ],
+    address: { city: 'Kandy', country: 'Sri Lanka' },
+    status: 'paid',
+    delivery_days: 2
+  },
+  {
+    _id: 'o5',
+    year: 2020,
+    cost: 1900,
+    items: [ { product: 'p1', size: [ 'S', 'XL' ], quantity: 15 } ],
+    address: { city: 'Colombo', country: 'Sri Lanka' },
+    status: 'pending',
+    delivery_days: 3
+  }
+]
+company> db.product.find({"status":"pending"})
+[
+  {
+    _id: 'o3',
+    year: 2018,
+    cost: 1500,
+    items: [ { product: 'p3', size: [ 'L', 'XL' ], quantity: 4 } ],
+    address: { city: 'Chennai', country: 'India' },
+    status: 'pending',
+    delivery_days: 4
+  },
+  {
+    _id: 'o5',
+    year: 2020,
+    cost: 1900,
+    items: [ { product: 'p1', size: [ 'S', 'XL' ], quantity: 15 } ],
+    address: { city: 'Colombo', country: 'Sri Lanka' },
+    status: 'pending',
+    delivery_days: 3
+  }
+]
+
+company> db.product.find({$and:[{"cost":{$gt:1500}},{"status":"paid"}]})
+[
+  {
+    _id: 'o1',
+    year: 2020,
+    cost: 3000,
+    items: [ { product: 'p1', size: [ 'M', 'L' ], quantity: 15 } ],
+    address: { city: 'Jaffna', country: 'Sri Lanka' },
+    status: 'paid',
+    delivery_days: 5
+  },
+  {
+    _id: 'o2',
+    year: 2020,
+    cost: 4500,
+    items: [
+      { product: 'p2', size: [ 'L' ], quantity: 20 },
+      { product: 'p3', size: [ 'M', 'S' ], quantity: 2 }
+    ],
+    address: { city: 'Colombo', country: 'Sri Lanka' },
+    status: 'paid',
+    delivery_days: 4
+  },
+  {
+    _id: 'o4',
+    year: 2017,
+    cost: 1700,
+    items: [
+      { product: 'p2', size: [ 'M', 'S' ], quantity: 14 },
+      { product: 'p4', size: [ 'M' ], quantity: 1 }
+    ],
+    address: { city: 'Kandy', country: 'Sri Lanka' },
+    status: 'paid',
+    delivery_days: 2
+  }
+]
+company> db.product.find({"items.product":{$in:["p1"]}})
+[
+  {
+    _id: 'o1',
+    year: 2020,
+    cost: 3000,
+    items: [ { product: 'p1', size: [ 'M', 'L' ], quantity: 15 } ],
+    address: { city: 'Jaffna', country: 'Sri Lanka' },
+    status: 'paid',
+    delivery_days: 5
+  },
+  {
+    _id: 'o5',
+    year: 2020,
+    cost: 1900,
+    items: [ { product: 'p1', size: [ 'S', 'XL' ], quantity: 15 } ],
+    address: { city: 'Colombo', country: 'Sri Lanka' },
+    status: 'pending',
+    delivery_days: 3
+  }
+]
+
+company> db.product.aggregate([{$match:{"year":{$gt:2017}}},{$group:{_id:"$year",totalDeliveryDays:{$sum:"$delivery_days"}}}])
+[
+  { _id: 2018, totalDeliveryDays: 4 },
+  { _id: 2020, totalDeliveryDays: 12 }
+]
+company> db.product.updateOne({"_id":"o3"},{$set:{"status":"paid"}})
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+company> db.product.find("_id":"o3")
+Uncaught:
+SyntaxError: Unexpected token, expected "," (1:21)
+
+> 1 | db.product.find("_id":"o3")
+    |                      ^
+  2 |
+
+company> db.product.find({"_id":"o3"})
+[
+  {
+    _id: 'o3',
+    year: 2018,
+    cost: 1500,
+    items: [ { product: 'p3', size: [ 'L', 'XL' ], quantity: 4 } ],
+    address: { city: 'Chennai', country: 'India' },
+    status: 'paid',
+    delivery_days: 4
+  }
+]
+company> db.product.find().sort({"cost":-1})
+[
+  {
+    _id: 'o2',
+    year: 2020,
+    cost: 4500,
+    items: [
+      { product: 'p2', size: [ 'L' ], quantity: 20 },
+      { product: 'p3', size: [ 'M', 'S' ], quantity: 2 }
+    ],
+    address: { city: 'Colombo', country: 'Sri Lanka' },
+    status: 'paid',
+    delivery_days: 4
+  },
+  {
+    _id: 'o1',
+    year: 2020,
+    cost: 3000,
+    items: [ { product: 'p1', size: [ 'M', 'L' ], quantity: 15 } ],
+    address: { city: 'Jaffna', country: 'Sri Lanka' },
+    status: 'paid',
+    delivery_days: 5
+  },
+  {
+    _id: 'o5',
+    year: 2020,
+    cost: 1900,
+    items: [ { product: 'p1', size: [ 'S', 'XL' ], quantity: 15 } ],
+    address: { city: 'Colombo', country: 'Sri Lanka' },
+    status: 'pending',
+    delivery_days: 3
+  },
+  {
+    _id: 'o4',
+    year: 2017,
+    cost: 1700,
+    items: [
+      { product: 'p2', size: [ 'M', 'S' ], quantity: 14 },
+      { product: 'p4', size: [ 'M' ], quantity: 1 }
+    ],
+    address: { city: 'Kandy', country: 'Sri Lanka' },
+    status: 'paid',
+    delivery_days: 2
+  },
+  {
+    _id: 'o3',
+    year: 2018,
+    cost: 1500,
+    items: [ { product: 'p3', size: [ 'L', 'XL' ], quantity: 4 } ],
+    address: { city: 'Chennai', country: 'India' },
+    status: 'paid',
+    delivery_days: 4
+  }
+]
+company> db.product.find().sort({"cost":-1}).limit(1)
+[
+  {
+    _id: 'o2',
+    year: 2020,
+    cost: 4500,
+    items: [
+      { product: 'p2', size: [ 'L' ], quantity: 20 },
+      { product: 'p3', size: [ 'M', 'S' ], quantity: 2 }
+    ],
+    address: { city: 'Colombo', country: 'Sri Lanka' },
+    status: 'paid',
+    delivery_days: 4
+  }
+]
+company> db.product.aggregate([{$group:{"_id":null,max_cost:{$max:"$cost"}}}])
+[ { _id: null, max_cost: 4500 } ]
+company> db.product.aggregate([{$group:{"_id":{},max_cost:{$max:"$cost"}}}])
+[ { _id: {}, max_cost: 4500 } ]
+company> db.product.renameCollection("product_order")
+{ ok: 1 }
+company> show collections
+product_order
+company>
